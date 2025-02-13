@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Vibes Generator</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .link-container {
+            margin-top: 20px;
+        }
+
+        #gifContainer {
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-4">Send Bad Vibes</h1>
+        <div class="col-8 col-md-6 mx-auto">
+            <input type="text" class="form-control" id="nameInput" placeholder="Enter name (up to 16 characters)"
+                maxlength="16">
+        </div>
+        <button class="btn btn-danger btn-lg mt-3" id="generateButton">Send Bad Vibes</button>
+
+        <div class="message" id="message"></div>
+
+        <div class="link-container" id="linkContainer" style="display: none;">
+            <p>Share this link: <a href="#" id="shareLink" target="_blank">Sharable Link</a></p>
+        </div>
+
+        <div id="gifContainer" style="display:none;">
+            <img src="" alt="Bad Vibe GIF" id="badVibeGif" class="img-fluid">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const giphyApiKey = "dqXfhcm9OMcJCO236cCEK77fNSKhwEWd";
+            const offsetGen = Math.floor(Math.random() * 100) + 1;
+
+            // Function to generate SHA1 hash with epoch time
+            function generateSHA1(name) {
+                const epochTime = Date.now();
+                const combined = `${epochTime}${name}${epochTime}`;
+                return CryptoJS.SHA1(combined).toString(CryptoJS.enc.Base64);
+            }
+
+            // Function to generate a random message (from a pre-defined set of messages)
+            function generateRandomMessage(name) {
+                const messages = [
+                    "$NAME, you have been inadequate lately.",
+                    "$NAME, are you even trying?",
+                    "$NAME, maybe try harder next time.",
+                    "$NAME, you really need to step it up.",
+                    "$NAME, your performance has been subpar.",
+                    "$NAME, I expected more from you.",
+                    "$NAME, things could be worse... but not by much.",
+                    "$NAME, I thought you'd do better by now.",
+                    "$NAME, let's just say I'm not impressed.",
+                    "$NAME, this is hardly your best work.",
+                    "$NAME, can we expect something more next time?",
+                    "$NAME, you barely made it this time.",
+                    "$NAME, I think you can do a little better.",
+                    "$NAME, a little more effort would go a long way.",
+                    "$NAME, this is a bit below expectations.",
+                    "$NAME, this isn’t exactly what I had in mind.",
+                    "$NAME, you're almost there... but not quite.",
+                    "$NAME, I’m sure you can do better.",
+                    "$NAME, don’t worry, it’s fine... I guess.",
+                    "$NAME, it’s better than nothing, I suppose.",
+                    "$NAME, not terrible, but not great either.",
+                    "$NAME, do you even care at this point?",
+                    "$NAME, that’s one way to do it.",
+                    "$NAME, not sure if I should be proud or disappointed.",
+                    "$NAME, it's not terrible, but it’s not amazing either.",
+                    "$NAME, I think you missed the mark here.",
+                    "$NAME, this was underwhelming, to say the least.",
+                    "$NAME, I'm trying to stay optimistic here.",
+                    "$NAME, let’s just call this ‘a work in progress’.",
+                    "$NAME, I guess it's the thought that counts.",
+                    "$NAME, next time, maybe put in a bit more effort?",
+                    "$NAME, let’s not talk about this again.",
+                    "$NAME, you tried... sort of.",
+                    "$NAME, just barely enough to get by.",
+                    "$NAME, I can see you tried... kind of.",
+                    "$NAME, maybe next time it’ll be more impressive.",
+                    "$NAME, that was... something.",
+                    "$NAME, I wouldn’t call it a success.",
+                    "$NAME, are you aiming for mediocrity?",
+                    "$NAME, you’ve definitely set the bar low.",
+                    "$NAME, well, at least you finished it.",
+                    "$NAME, better luck next time.",
+                    "$NAME, you're almost there... maybe.",
+                    "$NAME, you might want to rethink this approach.",
+                    "$NAME, let's just say... this isn’t your best work.",
+                    "$NAME, I guess you did what you could.",
+                    "$NAME, this is... something, I suppose.",
+                    "$NAME, it’s not bad. But it’s not good either.",
+                    "$NAME, I expected this, honestly.",
+                    "$NAME, you might want to give it another go.",
+                    "$NAME, I don’t know what I expected, but not this.",
+                    "$NAME, I’m speechless... not in a good way.",
+                    "$NAME, this could’ve gone a lot better.",
+                    "$NAME, you’re almost there... keep trying.",
+                    "$NAME, let’s just call it 'adequate'.",
+                    "$NAME, good effort... sort of.",
+                    "$NAME, it’s something, I suppose.",
+                    "$NAME, I’m sure this isn’t what you had in mind.",
+                    "$NAME, I guess that’s one way to do it.",
+                    "$NAME, this is... acceptable, I guess.",
+                    "$NAME, that’s not exactly what I was hoping for.",
+                    "$NAME, at least you tried... kind of.",
+                    "$NAME, a little more enthusiasm might help.",
+                    "$NAME, a little less ‘meh’ next time, please.",
+                    "$NAME, that’s an interesting approach.",
+                    "$NAME, it’s fine... I guess.",
+                    "$NAME, that’s not how I’d do it, but okay.",
+                    "$NAME, at least it’s done.",
+                    "$NAME, this is definitely something.",
+                    "$NAME, well, it’s done.",
+                    "$NAME, I’m not sure how to feel about this.",
+                    "$NAME, I don’t even know what to say about this.",
+                    "$NAME, well, it’s a start.",
+                    "$NAME, not great, not terrible.",
+                    "$NAME, I wouldn’t have done it like that, but okay.",
+                    "$NAME, it’s... it’s fine.",
+                    "$NAME, you could've done this in half the time.",
+                    "$NAME, can you make it less disappointing next time?",
+                    "$NAME, it’s not a total disaster.",
+                    "$NAME, that’s... okay, I guess.",
+                    "$NAME, next time, maybe try to care more.",
+                    "$NAME, I was expecting something better.",
+                    "$NAME, next time aim for ‘good’, not ‘just okay’.",
+                    "$NAME, I was expecting a little more effort.",
+                    "$NAME, try aiming for ‘good enough’ next time.",
+                    "$NAME, don’t worry, it’s fine... sort of.",
+                    "$NAME, I wouldn’t say it’s perfect, but it works.",
+                    "$NAME, I’m sure this is exactly what you were going for.",
+                    "$NAME, that was, um, certainly something.",
+                    "$NAME, maybe aim for ‘improvement’ next time.",
+                    "$NAME, I don’t think that’s what I had in mind.",
+                    "$NAME, are we calling this done now?",
+                    "$NAME, not quite what I expected, but okay.",
+                    "$NAME, this could have gone a lot better.",
+                    "$NAME, maybe next time it won’t be such a letdown.",
+                    "$NAME, you’re not getting an award for this.",
+                    "$NAME, you did... something.",
+                    "$NAME, I think we can do better next time.",
+                    "$NAME, you might want to rethink this approach.",
+                    "$NAME, a little more focus might help.",
+                    "$NAME, let’s just hope it’s enough.",
+                    "$NAME, next time maybe try to surprise me.",
+                ];
+
+                const randomIndex = Math.floor(Math.random() * messages.length);
+                const messageTemplate = messages[randomIndex];
+                return messageTemplate.replace('$NAME', name);
+            }
+
+            function fetchGif(query) {
+                return fetch(`https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=1&offset=${offsetGen}&rating=g&lang=en`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const gifUrl = data.data[0]?.images?.original?.url;
+                        return gifUrl || '';
+                    });
+            }
+
+            document.getElementById("generateButton").addEventListener("click", function () {
+                const name = document.getElementById("nameInput").value.trim();
+
+                if (!name) {
+                    alert("Please enter a name!");
+                    return;
+                }
+
+                const randomMessage = generateRandomMessage(name);
+                const sha1Hash = generateSHA1(name);
+
+                document.getElementById("message").innerText = randomMessage;
+
+                const shareableLink = `${window.location.origin}?name=${name}&hash=${sha1Hash}`;
+                document.getElementById("shareLink").setAttribute("href", shareableLink);
+                document.getElementById("linkContainer").style.display = 'block';
+
+                fetchGif("thumbs down").then(gifUrl => {
+                    if (gifUrl) {
+                        document.getElementById("badVibeGif").setAttribute("src", gifUrl);
+                        document.getElementById("gifContainer").style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
