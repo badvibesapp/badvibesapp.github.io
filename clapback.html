@@ -16,17 +16,131 @@
     </div>
 
     <script>
-        const clapbacks = [
-            "I’d love to help, but I’m currently at capacity.",
-            "That sounds important. Let’s revisit in Q3.",
-            "I'll add it to my list, but can’t guarantee prioritization.",
-            "I’d be happy to assist once my current workload allows.",
-            "Let’s circle back… eventually."
-        ];
+const clapbacks = [
+    "I’d love to help, but I’m currently at capacity.",
+    "That sounds important. Let’s revisit in Q3.",
+    "I'll add it to my list, but can’t guarantee prioritization.",
+    "I’d be happy to assist once my current workload allows.",
+    "Let’s circle back… eventually.",
+    "I appreciate the urgency, but let’s be realistic.",
+    "That’s a great idea. For someone else.",
+    "I’d love to chat about this, but I have another meeting… forever.",
+    "This is a top priority—right behind my actual priorities.",
+    "Let me run this up the flagpole and see who ignores it.",
+    "I’d love to brainstorm, but I’ve reached my thinking quota for the day.",
+    "Let's put a pin in that and forget where we put it.",
+    "This seems like a great opportunity for you to take the lead.",
+    "I hear your concerns, but my interest level remains unchanged.",
+    "Let’s sync on this after I miraculously find time.",
+    "I value your input, even if I don’t plan to act on it.",
+    "Interesting take. I’ll be sure to consider it when I have time. I won’t.",
+    "I think we have different definitions of ‘urgent’.",
+    "I’d love to help, but that sounds like a you problem.",
+    "I’ll look into it—right after I finish not doing that.",
+    "I’ll flag this for follow-up. Eventually. Maybe.",
+    "I’m currently optimizing my workflow… by avoiding this.",
+    "I'll check my schedule, but I wouldn’t get my hopes up.",
+    "Great suggestion. I’ll add it to the pile.",
+    "I see your point, but I also see my workload.",
+    "That sounds like a fantastic initiative for next year.",
+    "My calendar is pretty full, but I’ll be sure to pretend to consider this.",
+    "I’d love to get to this, but unfortunately, I do not.",
+    "This is outside my expertise, but best of luck.",
+    "Sounds like a great stretch goal. For someone else.",
+    "I'll get back to you when my motivation returns from its vacation.",
+    "That sounds like a great use of your time.",
+    "I’d love to provide feedback, but I don’t want to.",
+    "Let’s hold off until it’s relevant. If ever.",
+    "This would be great for someone with bandwidth. Not me, though.",
+    "I’d love to collaborate, but I also value my sanity.",
+    "I have so many thoughts on this… none of them useful.",
+    "Let’s park this idea somewhere and forget where we left it.",
+    "I think this would benefit from some additional overthinking.",
+    "That’s an ambitious deadline. Good luck with that.",
+    "That’s a great idea. You should definitely own that.",
+    "I’ll need some time to pretend to think about this.",
+    "Let me run the numbers. *Opens calculator, types 911*",
+    "I’d love to workshop this, but that sounds exhausting.",
+    "This is an excellent initiative. For another team.",
+    "I’d love to weigh in, but I don’t want to.",
+    "That’s a fascinating problem for someone else to solve.",
+    "I can’t make it, but I’ll send my best regards.",
+    "Let’s pivot this discussion toward someone who cares.",
+    "I’ll absolutely consider this. In the distant future.",
+    "I think we should wait and see if this resolves itself.",
+    "I appreciate your enthusiasm, but I’m choosing peace.",
+    "I see the issue, but I also see my weekend approaching.",
+    "I’d love to dive into this, but my coffee is empty.",
+    "This needs further analysis. By someone else.",
+    "That’s an interesting take. Let’s not pursue it.",
+    "I’ll give this the attention it deserves—minimal.",
+    "I’ll take a look when I’m in the right headspace. Never.",
+    "This would be more effective if I had time to care.",
+    "That’s a priority, just not for me.",
+    "I could jump on this, but I choose not to.",
+    "This is a great initiative. I’ll cheer from the sidelines.",
+    "I’d love to, but I have prior engagements with my sanity.",
+    "I’ll let you know if I develop an opinion on this.",
+    "That’s a great insight. I will promptly ignore it.",
+    "I’ll look into this right after my next existential crisis.",
+    "I’ll let you take point on this exciting new adventure.",
+    "That sounds like a future problem. Let’s keep it there.",
+    "I’d love to help, but I have another excuse prepared already.",
+    "I'll be sure to revisit this idea when the stars align.",
+    "I'm sure this will work itself out. Without me.",
+    "I’d love to contribute, but I also enjoy free time.",
+    "This is a great opportunity for someone with fewer boundaries.",
+    "I’ll review this when I have the emotional bandwidth.",
+    "That’s an interesting proposal. I’m not interested.",
+    "This is exactly the type of thing I should avoid.",
+    "I appreciate your optimism, but I’m more of a realist.",
+    "That’s a great question. Let’s avoid answering it.",
+    "I’ll touch base when I figure out how to care about this.",
+    "Let’s connect on this at a later, unspecified date.",
+    "This sounds important. Let me pretend to take notes.",
+    "This is a fantastic topic for another meeting that I won’t attend.",
+    "I’ll look into this once my email backlog stops haunting me.",
+    "I could take this on, but why would I?",
+    "I’d be happy to discuss this. In theory.",
+    "I’ll need to check if I’m legally required to care.",
+    "I would love to help, but I have other ways to suffer.",
+    "I’ll be sure to mention this in my next complaint.",
+    "This is a challenge I’ll let someone else accept.",
+    "I’d love to say yes, but I’m also a fan of honesty.",
+    "I could do this, but that wouldn’t be in anyone’s best interest.",
+    "I’d love to revisit this once I develop an interest.",
+    "Let’s take this offline and then never bring it up again.",
+    "I’ll add this to my list of things to avoid.",
+    "That’s a bold assumption about my availability.",
+    "This would be a great initiative… for another department."
+];
+        // 🔹 Cycling Text Effect Function
+        function cycleTextEffect(targetElement, finalText) {
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?$@#";
+            let iterations = 0;
+            let maxIterations = finalText.length * 2; // Adjusts speed based on text length
 
+            let interval = setInterval(() => {
+                targetElement.innerText = finalText
+                    .split("")
+                    .map((char, index) =>
+                        index < iterations / 2 ? char : characters[Math.floor(Math.random() * characters.length)]
+                    )
+                    .join("");
+
+                iterations++;
+
+                if (iterations >= maxIterations) {
+                    clearInterval(interval);
+                    targetElement.innerText = finalText; // Set final text after cycling
+                }
+            }, 50); // Speed of the effect (lower = faster)
+        }
+
+        // 🔹 Updated Button Click Event Listener
         document.getElementById("generateClapback").addEventListener("click", function () {
-            const randomIndex = Math.floor(Math.random() * clapbacks.length);
-            document.getElementById("clapback").innerText = clapbacks[randomIndex];
+            let randomIndex = Math.floor(Math.random() * clapbacks.length);
+            cycleTextEffect(document.getElementById("clapback"), clapbacks[randomIndex]);
         });
     </script>
 </body>

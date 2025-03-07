@@ -16,19 +16,136 @@
     </div>
 
     <script>
-        const excuses = [
-            "I have a dentist appointment… at 3 AM.",
-            "I think my goldfish is sick, need to monitor them.",
-            "My VPN isn’t connecting, must be a cyber attack.",
-            "My keyboard broke, I can only type vowels now.",
-            "I’d love to, but I suddenly remembered I have amnesia."
-        ];
+const excuses = [
+    "I have a dentist appointment… at 3 AM.",
+    "I think my goldfish is sick, need to monitor them.",
+    "My VPN isn’t connecting, must be a cyber attack.",
+    "My keyboard broke, I can only type vowels now.",
+    "I’d love to, but I suddenly remembered I have amnesia.",
+    "My Wi-Fi only works when I hold my laptop above my head.",
+    "I accidentally scheduled a nap during that time slot.",
+    "My horoscope said today is a bad day for meetings.",
+    "I just spilled coffee all over my productivity.",
+    "My cat is currently sitting on my keyboard, and I don’t have the heart to move them.",
+    "I accidentally joined a Zoom meeting in another dimension.",
+    "I have an urgent appointment with my couch.",
+    "I have to reorganize my fridge by color.",
+    "My computer caught a virus, and now it only speaks Klingon.",
+    "I’m currently in a heated debate with my microwave about life choices.",
+    "I’m helping my dog write their memoir.",
+    "I accidentally locked myself in the bathroom… again.",
+    "I have to babysit my neighbor’s invisible pet.",
+    "I need to charge my motivation… it’s at 1%.",
+    "My laptop just updated… to Windows ME.",
+    "I have to finish an email to my past self warning them about this meeting.",
+    "The Wi-Fi signal only works if I stand outside in the rain.",
+    "My houseplants need an emergency therapy session.",
+    "My internet is allergic to productivity.",
+    "I need to call tech support about my disappearing motivation.",
+    "My shadow just challenged me to a race—can’t back down now.",
+    "I’m still recovering from the emotional trauma of my last meeting.",
+    "I just realized my favorite TV show doesn’t exist, and I need time to process this.",
+    "My alarm clock is on strike.",
+    "I got caught in a time loop and have to relive this morning until I get it right.",
+    "My toaster caught fire, and I need to investigate.",
+    "My phone fell into the void of my couch.",
+    "I need to teach my cat the importance of deadlines.",
+    "I have to finish a game of chess with my existential dread.",
+    "I’m still waiting for my food delivery from 2019.",
+    "My goldfish just asked for legal advice.",
+    "My Wi-Fi router is holding my internet hostage.",
+    "My battery is at 1%, and so is my will to attend.",
+    "I have a prior commitment with my bed.",
+    "I just found out that Monday exists and need time to recover.",
+    "The universe sent me a sign to take a day off.",
+    "I can’t make it, I’m stuck in a philosophical crisis.",
+    "I need to decode an ancient scroll I found under my desk.",
+    "My dog ate my motivation.",
+    "My imaginary friend is having a rough day.",
+    "My office chair just quit on me.",
+    "I’m waiting for my Wi-Fi to decide if it wants to work today.",
+    "My favorite sock is missing, and I can’t focus on anything else.",
+    "My laptop overheated from my sheer brilliance.",
+    "I have to finish this extremely important game of solitaire.",
+    "My kitchen is haunted, and I need to investigate.",
+    "My keyboard only types in Morse code now.",
+    "I tried to open a document, and my computer decided to take a personal day.",
+    "I have to walk my turtle, and it’s a long journey.",
+    "My Roomba unionized and is refusing to clean until I leave my desk.",
+    "I’m currently too busy staring at the ceiling contemplating life.",
+    "I accidentally turned on ‘Airplane Mode’ on my brain.",
+    "I have to wait for my coffee to reach the perfect temperature.",
+    "My webcam is possessed and keeps turning on randomly.",
+    "My alarm didn’t go off because it also hates meetings.",
+    "I fell into a Wikipedia rabbit hole and forgot what year it is.",
+    "I have to perform an exorcism on my inbox.",
+    "My Wi-Fi is only working at 144p today.",
+    "I have to wait for my cat to finish their dramatic monologue.",
+    "My entire schedule just got deleted by a rogue spreadsheet.",
+    "I just realized I forgot how to spell my own name and need to relearn.",
+    "The weather is too nice, and I refuse to be indoors.",
+    "I’m currently too busy manifesting a better work-life balance.",
+    "My existential crisis just got a sequel.",
+    "I need to finish my dissertation on ‘Why Meetings Should Be Emails.’",
+    "My laptop just blue-screened out of protest.",
+    "I have an important appointment with my blanket fort.",
+    "I need to translate my to-do list into ancient Latin.",
+    "I accidentally deleted my motivation.",
+    "I have to file a complaint against Mondays.",
+    "My tea leaves told me not to work today.",
+    "I tried to open a spreadsheet, and my soul left my body.",
+    "My favorite coffee mug is missing, and I can't function without it.",
+    "I need to go outside and touch grass before I lose my sanity.",
+    "My inner child just requested a mental health day.",
+    "I was about to start working, but then I blinked, and it was already lunchtime.",
+    "I need to call IT support for my brain—it's lagging.",
+    "I am legally obligated to take a break from responsibility today.",
+    "I need to reboot myself before I can work.",
+    "My pet rock needs attention.",
+    "I tried to open an Excel file, and my computer started crying.",
+    "My horoscope said, 'Avoid unnecessary stress today'—so here we are.",
+    "I was about to join the meeting, but my internet staged a rebellion.",
+    "I have to perform a ritual to summon my lost motivation.",
+    "I was almost productive today, but then I sneezed, and the moment passed.",
+    "I need to take a mental health walk… to the fridge.",
+    "I just found out my to-do list is a work of fiction.",
+    "I have to finish my research paper on ‘How to Avoid Meetings Successfully.’",
+    "My keyboard developed stage fright and won’t type anymore.",
+    "I’m currently working on an elaborate escape plan from responsibility.",
+    "I tried to read the agenda, but my eyes glazed over.",
+    "I’m stuck in a loop of 'just five more minutes of procrastination.'",
+    "I was about to start working, but then I realized I don't want to.",
+    "I need to organize my desktop icons for absolutely no reason.",
+    "I have to attend an urgent meeting with my couch."
+];
+        // 🔹 Cycling Text Effect Function
+        function cycleTextEffect(targetElement, finalText) {
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?$@#";
+            let iterations = 0;
+            let maxIterations = finalText.length * 2; // Adjust speed based on text length
 
+            let interval = setInterval(() => {
+                targetElement.innerText = finalText
+                    .split("")
+                    .map((char, index) =>
+                        index < iterations / 2 ? char : characters[Math.floor(Math.random() * characters.length)]
+                    )
+                    .join("");
+
+                iterations++;
+
+                if (iterations >= maxIterations) {
+                    clearInterval(interval);
+                    targetElement.innerText = finalText; // Set final text after cycling
+                }
+            }, 50); // Speed of the effect (lower = faster)
+        }
+
+        // 🔹 Updated Button Click Event Listener
         document.getElementById("generateExcuse").addEventListener("click", function () {
-            const randomIndex = Math.floor(Math.random() * excuses.length);
-            document.getElementById("excuse").innerText = excuses[randomIndex];
+            let randomIndex = Math.floor(Math.random() * excuses.length);
+            cycleTextEffect(document.getElementById("excuse"), excuses[randomIndex]);
         });
     </script>
 </body>
 </html>
-

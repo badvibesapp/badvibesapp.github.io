@@ -19,6 +19,10 @@
 
         .container {
             text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         .message {
@@ -30,10 +34,12 @@
 
         .link-container {
             margin-top: 20px;
+            display: none;
         }
 
         #gifContainer {
             margin-top: 20px;
+            display: none;
         }
 
         img {
@@ -42,16 +48,8 @@
             border-radius: 8px;
         }
 
-        .alert {
-            margin-top: 20px;
-        }
-
         .footer {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -59,20 +57,24 @@
 <body>
     <div class="container">
         <h1 class="display-4">Send Bad Vibes</h1>
+        <p>Enter a name and let them know how "great" they are!</p>
         <div class="col-8 col-md-6 mx-auto">
-            <input type="text" class="form-control" id="nameInput" placeholder="Enter name (up to 16 characters)"
-                maxlength="16">
+            <input type="text" class="form-control" id="nameInput" placeholder="Enter name (up to 16 characters)" maxlength="16">
         </div>
         <button class="btn btn-danger btn-lg mt-3" id="generateButton">Send Bad Vibes</button>
 
         <div class="message" id="message"></div>
 
-        <div class="link-container" id="linkContainer" style="display: none;">
+        <div class="link-container" id="linkContainer">
             <p>Share this link: <a href="#" id="shareLink" target="_blank">Sharable Link</a></p>
         </div>
 
-        <div id="gifContainer" style="display:none;">
+        <div id="gifContainer">
             <img src="" alt="Bad Vibe GIF" id="badVibeGif" class="img-fluid">
+        </div>
+
+        <div class="footer">
+            <a href="index.html" class="btn btn-secondary">Back to Main Page</a>
         </div>
     </div>
 
@@ -81,8 +83,7 @@
             const giphyApiKey = "dqXfhcm9OMcJCO236cCEK77fNSKhwEWd";
             const offsetGen = Math.floor(Math.random() * 100) + 1;
 
-            // List of passive-aggressive messages
-            const messages = [
+const messages = [
                 "$NAME, you have been inadequate lately.",
                 "$NAME, are you even trying?",
                 "$NAME, maybe try harder next time.",
@@ -186,51 +187,39 @@
                 "$NAME, let’s just hope it’s enough.",
                 "$NAME, next time maybe try to surprise me.",
             ];
-
             function generateRandomMessage(name) {
                 const randomIndex = Math.floor(Math.random() * messages.length);
-                const messageTemplate = messages[randomIndex];
-                return messageTemplate.replace('$NAME', name);
+                return messages[randomIndex].replace('$NAME', name);
             }
 
             function fetchGif(query) {
                 return fetch(`https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=1&offset=${offsetGen}&rating=g&lang=en`)
                     .then(response => response.json())
-                    .then(data => {
-                        const gifUrl = data.data[0]?.images?.original?.url;
-                        return gifUrl || '';
-                    });
+                    .then(data => data.data[0]?.images?.original?.url || '');
             }
 
-            // Automatically generate bad vibes if URL has a 'name' parameter
             function autoGenerateBadVibes() {
                 const urlParams = new URLSearchParams(window.location.search);
-                const name = urlParams.get('name'); // Get the 'name' parameter from the URL
+                const name = urlParams.get('name');
 
                 if (name) {
-                    document.getElementById('nameInput').value = name; // Populate input with 'name'
+                    document.getElementById('nameInput').value = name;
+                    document.getElementById("message").innerText = generateRandomMessage(name);
+                    const shareableLink = `${window.location.origin}/badvibesapp.html?name=${encodeURIComponent(name)}`;
+                    document.getElementById("shareLink").setAttribute("href", shareableLink);
+                    document.getElementById("linkContainer").style.display = 'block';
 
-                    const randomMessage = generateRandomMessage(name);
-                    document.getElementById("message").innerText = randomMessage; // Display the message
-
-                    const shareableLink = `${window.location.origin}?name=${name}`;
-                    document.getElementById("shareLink").setAttribute("href", shareableLink); // Set sharable link
-                    document.getElementById("linkContainer").style.display = 'block'; // Show link container
-
-                    // Fetch and display GIF
                     fetchGif("dislike").then(gifUrl => {
                         if (gifUrl) {
                             document.getElementById("badVibeGif").setAttribute("src", gifUrl);
-                            document.getElementById("gifContainer").style.display = 'block'; // Show gif container
+                            document.getElementById("gifContainer").style.display = 'block';
                         }
                     });
                 }
             }
 
-            // Call the auto-generate function when the page loads
             autoGenerateBadVibes();
 
-            // Button click event for manual generation
             document.getElementById("generateButton").addEventListener("click", function () {
                 const name = document.getElementById("nameInput").value.trim();
 
@@ -239,10 +228,8 @@
                     return;
                 }
 
-                const randomMessage = generateRandomMessage(name);
-                document.getElementById("message").innerText = randomMessage;
-
-                const shareableLink = `${window.location.origin}?name=${name}`;
+                document.getElementById("message").innerText = generateRandomMessage(name);
+                const shareableLink = `${window.location.origin}/badvibesapp.html?name=${encodeURIComponent(name)}`;
                 document.getElementById("shareLink").setAttribute("href", shareableLink);
                 document.getElementById("linkContainer").style.display = 'block';
 
@@ -257,5 +244,3 @@
     </script>
 </body>
 </html>
-
-
