@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Defier</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Deadline Defier</h1>
+        <p>Extend your deadlines with these foolproof excuses.</p>
+        <button id="generateExcuse" class="btn">Generate Excuse</button>
+        <p id="excuse"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const excuses = [
+            "Due to unforeseen circumstances, we require an extension.",
+            "External dependencies have caused unexpected delays.",
+            "A strategic pivot requires more time for execution.",
+            "We’re revising our approach for better alignment.",
+            "The timeline has shifted due to evolving business needs."
+        ];
+
+        document.getElementById("generateExcuse").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * excuses.length);
+            document.getElementById("excuse").innerText = excuses[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

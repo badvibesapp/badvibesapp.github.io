@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blame Allocator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Blame Allocator</h1>
+        <p>Who is responsible for this mess? Let's find out.</p>
+        <button id="generateBlame" class="btn">Assign Blame</button>
+        <p id="blame"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const blameTargets = [
+            "The interns.",
+            "IT support.",
+            "Management.",
+            "The person who quit last week.",
+            "The ambiguous documentation.",
+            "The AI overlords."
+        ];
+
+        document.getElementById("generateBlame").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * blameTargets.length);
+            document.getElementById("blame").innerText = blameTargets[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

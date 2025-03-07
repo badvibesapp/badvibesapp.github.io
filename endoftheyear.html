@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End of Year Review</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 80%;
+            max-width: 400px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        select, input, button {
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 300px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #loadingScreen {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #resultScreen {
+            display: none;
+            font-size: 18px;
+            color: black;
+            text-align: left;
+            line-height: 1.5;
+            font-family: 'Georgia', serif;
+            padding: 20px;
+            border-left: 5px solid #007bff;
+        }
+        #reviewHeader {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="formScreen">
+        <h2>End of Year Review</h2>
+        <input type="text" id="name" placeholder="Enter your name">
+        <select id="role">
+            <option value="Project Manager">Project Manager</option>
+            <option value="Pen Tester">Pen Tester</option>
+            <option value="Consultant">Consultant</option>
+        </select>
+        <select id="level">
+            <option value="Junior">Junior</option>
+            <option value="Mid-Level">Mid-Level</option>
+            <option value="Senior">Senior</option>
+            <option value="Lead">Lead</option>
+        </select>
+        <button onclick="startReview()">Submit</button>
+    </div>
+
+    <div class="container" id="loadingScreen">
+        <h2>Processing your review...</h2>
+    </div>
+
+    <div class="container" id="resultScreen">
+        <div id="reviewHeader">End of Year Performance Review</div>
+        <p id="reviewResult"></p>
+    </div>
+
+    <script>
+        function startReview() {
+            let name = document.getElementById("name").value.trim();
+            let role = document.getElementById("role").value;
+            let level = document.getElementById("level").value;
+
+            if (name === "") {
+                alert("Please enter your name.");
+                return;
+            }
+
+            document.getElementById("formScreen").style.display = "none";
+            document.getElementById("loadingScreen").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("loadingScreen").style.display = "none";
+                document.getElementById("resultScreen").style.display = "block";
+
+                let reviewMessage = `<p>Dear <strong>${name}</strong>,</p>
+                <p>We would like to extend our gratitude for your hard work and dedication throughout the year.</p>
+                <p>Your final performance rating is: <strong style="color:green;">A+</strong>.</p>
+                <p>As a result of your exceptional contributions, the organization has decided to place you in a more <em>hands-on</em> role for the upcoming year.</p>
+                <p>Effective immediately, you are being <strong style="color:red;">demoted</strong> to <strong>Trainee ${role}</strong>.</p>
+                <p>We appreciate your continued efforts and look forward to seeing your growth in this new position.</p>
+                <p>Sincerely,</p>
+                <p><strong>The Management Team</strong></p>`;
+
+                document.getElementById("reviewResult").innerHTML = reviewMessage;
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excuse-O-Matic - Work Excuse Generator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Excuse-O-Matic</h1>
+        <p>Need an excuse to get out of something? Click below.</p>
+        <button id="generateExcuse" class="btn">Generate Excuse</button>
+        <p id="excuse"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const excuses = [
+            "I have a dentist appointment… at 3 AM.",
+            "I think my goldfish is sick, need to monitor them.",
+            "My VPN isn’t connecting, must be a cyber attack.",
+            "My keyboard broke, I can only type vowels now.",
+            "I’d love to, but I suddenly remembered I have amnesia."
+        ];
+
+        document.getElementById("generateExcuse").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * excuses.length);
+            document.getElementById("excuse").innerText = excuses[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

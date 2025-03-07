@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Clapback Generator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Corporate Clapback Generator</h1>
+        <p>Need a professional but cutting response? Click below.</p>
+        <button id="generateClapback" class="btn">Generate Clapback</button>
+        <p id="clapback"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const clapbacks = [
+            "I’d love to help, but I’m currently at capacity.",
+            "That sounds important. Let’s revisit in Q3.",
+            "I'll add it to my list, but can’t guarantee prioritization.",
+            "I’d be happy to assist once my current workload allows.",
+            "Let’s circle back… eventually."
+        ];
+
+        document.getElementById("generateClapback").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * clapbacks.length);
+            document.getElementById("clapback").innerText = clapbacks[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

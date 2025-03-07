@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procrastination Simulator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Procrastination Simulator</h1>
+        <p>Instead of working, do these totally necessary tasks.</p>
+        <button id="generateTask" class="btn">Generate Task</button>
+        <p id="task"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const tasks = [
+            "Rearrange your desk for optimal workflow.",
+            "Organize your email folders for no real reason.",
+            "Google 'how to focus better' instead of focusing.",
+            "Check Slack, then check it again just in case.",
+            "Start a to-do list… then take a break for making progress."
+        ];
+
+        document.getElementById("generateTask").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * tasks.length);
+            document.getElementById("task").innerText = tasks[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

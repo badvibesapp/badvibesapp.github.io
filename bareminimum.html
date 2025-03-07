@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bare Minimum Evaluator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>The Bare Minimum Evaluator</h1>
+        <p>Get a performance review that won't boost morale.</p>
+        <button id="generateReview" class="btn">Generate Review</button>
+        <p id="review"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const reviews = [
+            "Technically, you did what was required.",
+            "You showed up, which is a start.",
+            "Could it be better? Yes. Did you try? Also yes, I think.",
+            "You met expectations… barely.",
+            "Effort was observed, though results were debatable."
+        ];
+
+        document.getElementById("generateReview").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * reviews.length);
+            document.getElementById("review").innerText = reviews[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

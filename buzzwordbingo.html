@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzzword Bingo - Corporate Jargon</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Buzzword Bingo</h1>
+        <p>Generate your next corporate buzzword-filled sentence.</p>
+        <button id="generateBuzzword" class="btn">Generate</button>
+        <p id="buzzword"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const phrases = [
+            "Let's leverage our synergies for scalable optimization.",
+            "We need to disrupt the paradigm and align our KPIs.",
+            "Our agile workflow enhances vertical integration.",
+            "Let's circle back and touch base for synergy maximization.",
+            "We’re optimizing cross-functional deliverables for engagement."
+        ];
+
+        document.getElementById("generateBuzzword").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * phrases.length);
+            document.getElementById("buzzword").innerText = phrases[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

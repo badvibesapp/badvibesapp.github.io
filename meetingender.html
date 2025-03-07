@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Ender</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Meeting Ender</h1>
+        <p>Need an excuse to leave? We got you.</p>
+        <button id="generateExcuse" class="btn">Generate Exit Excuse</button>
+        <p id="excuse"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const excuses = [
+            "I have a hard stop in 5 minutes.",
+            "I need to jump to another meeting, but feel free to continue.",
+            "I’ll let you all discuss this further, but I have to drop off.",
+            "I have a prior commitment I need to attend to.",
+            "Apologies, I need to step away due to an urgent matter."
+        ];
+
+        document.getElementById("generateExcuse").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * excuses.length);
+            document.getElementById("excuse").innerText = excuses[randomIndex];
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unhelpful Motivational Quotes</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Unhelpful Motivational Quotes</h1>
+        <p>Get inspired... or not.</p>
+        <button id="generateQuote" class="btn">Generate Quote</button>
+        <p id="quote"></p>
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const quotes = [
+            "You miss 100% of the deadlines you ignore.",
+            "The road to success is paved with email follow-ups.",
+            "If at first you don’t succeed, redefine success.",
+            "Nothing is impossible—except meeting all your KPIs.",
+            "Work smarter, not harder. Or just take a nap instead."
+        ];
+
+        document.getElementById("generateQuote").addEventListener("click", function () {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quote").innerText = quotes[randomIndex];
+        });
+    </script>
+</body>
+</html>
+
