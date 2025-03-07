@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +13,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             margin: 0;
         }
 
@@ -45,6 +45,14 @@
         .alert {
             margin-top: 20px;
         }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -66,6 +74,11 @@
         <div id="gifContainer" style="display:none;">
             <img src="" alt="Bad Vibe GIF" id="badVibeGif" class="img-fluid">
         </div>
+    </div>
+
+    <!-- PTSDsuite Button at Bottom -->
+    <div class="footer">
+        <a href="ptsd.html" class="btn btn-dark btn-lg">PTSDsuite - Pen Testing Service Delivery Suite</a>
     </div>
 
     <script>
