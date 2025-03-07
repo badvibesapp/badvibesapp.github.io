@@ -169,7 +169,7 @@ let excuses = [
             let cycleExcuses = setInterval(() => {
                 excuseElement.innerText = excuses[counter % excuses.length];
                 counter++;
-            }, 50); // Faster cycling speed
+            }, 25); // Faster cycling speed
 
             // Stop cycling after 5 seconds
             setTimeout(() => {
