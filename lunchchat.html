@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Chat Generator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lunch Chat Generator</h1>
+        <p>Need a conversation starter? Pick how many topics and click below.</p>
+
+        <label for="topicCount">How many topics?</label>
+        <select id="topicCount">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <button id="generateTopic" class="btn">Generate Topic</button>
+        <ul id="topicList"></ul>
+
+        <a href="index.html" class="btn">Back to Main Page</a>
+    </div>
+
+    <script>
+        const topics = [
+            "What’s the best way to fold a fitted sheet?",
+            "Paperclips vs. staples—what’s superior?",
+            "How many pillows should a person own?",
+            "Is tap water better than bottled water?",
+            "The correct way to tie your shoelaces.",
+            "The best temperature to set an office thermostat.",
+            "Do you think about how often you blink?",
+            "The proper way to butter toast.",
+            "Is soup a meal or just an appetizer?",
+            "What’s the most efficient way to peel an orange?",
+            "What’s the best grocery store checkout strategy?",
+            "Is there a wrong way to eat an apple?",
+            "Socks: Fold or roll in the drawer?",
+            "The best way to cut a sandwich: Diagonal or straight?",
+            "Are chairs just elevated floors?",
+            "Should you brush your teeth before or after breakfast?",
+            "The best way to organize books—by color, size, or author?",
+            "Are indoor plants actually worth the effort?",
+            "Is it worth reading the user manual of a new appliance?",
+            "The correct way to load a dishwasher: Chaos or precision?",
+            "What’s the best color for a wall in an office?",
+            "Is there an optimal way to scratch an itch?",
+            "How often should you really change your bedsheets?",
+            "Is a thumb a finger?",
+            "The physics of why shoelaces always untie themselves.",
+            "Is it possible to have too many coffee mugs?",
+            "Are there too many buttons on a TV remote?",
+            "What’s the best way to store leftovers?",
+            "How much toothpaste is the correct amount?",
+            "The politics of using speakerphone in public.",
+            "What’s the best type of notebook binding?",
+            "Should cereal be eaten dry or with milk?",
+            "Is wrapping paper wasteful or essential?",
+            "The history of why we shake hands.",
+            "Why do socks disappear in the laundry?",
+            "The logistics of why gas stations have TV screens now.",
+            "The science behind why ice cubes sometimes crack.",
+            "Are elevators just vertical trains?",
+            "If you were a utensil, which one would you be?",
+            "What’s the ideal ratio of peanut butter to jelly?",
+            "Why do keyboards have a Caps Lock key no one uses?",
+            "The etiquette of replying to an email immediately vs. waiting.",
+            "Why is the “low battery” notification so stressful?",
+            "How do you actually define a sandwich?",
+            "Do clocks move too fast or too slow?",
+            "Is there a right way to sneeze?",
+            "The unnecessary complexity of light switches.",
+            "Why are receipts so unnecessarily long?",
+            "What’s the best way to store plastic bags?",
+            "Why do some people pronounce GIF incorrectly?",
+            "What’s the easiest way to manipulate someone into doing what you want—guilt, flattery, or straight-up deception?",
+            "Be honest—how many laws do you think you've technically broken, but just never got caught?",
+            "If you had to pick one coworker who definitely has skeletons in their closet, who would it be and what’s your theory?",
+            "What’s the most morally questionable thing you’ve ever done just because you knew there’d be no consequences?",
+            "If you had to expose one person’s biggest secret in this office just to save your own skin, who are you throwing under the bus and why?",
+            "If you could get away with stealing a coworker’s identity for a week, whose would it be and why ? ",
+            "What’s the worst thing you’ve ever said about someone in this office behind their back?",
+            "If you had to start an underground business inside this company, what would you be selling?",
+            "Would you rather get caught lying about your qualifications at work or get caught having an office affair?",
+            "If you found a USB stick in the office labeled 'DO NOT OPEN' would you look at it? What’s the worst thing you can imagine being on it?",
+            "What’s the worst thing you’ve ever done to someone, and they still have no idea it was you?",
+            "Be real—how much of your paycheck do you actually earn vs. how much is just you pretending to work?",
+            "What’s the most illegal thing you’ve done that, if exposed, would instantly ruin your life?",
+            "If you had to choose between stealing from a charity or scamming an elderly person, which one are you picking?",
+            "Would you rather get caught cheating on your partner or cheating on your taxes? (One is jail, the other is just awkward…)",
+            "What’s the most sociopathic thing you’ve ever done just to see if you could get away with it?",
+            "What’s the most shady thing you’ve done at work, but no one ever caught you?",
+            "Have you ever lied about something serious just to avoid consequences? How bad was the lie?",
+            "What’s the meanest thing you’ve ever said to someone on purpose?",
+            "If someone found out your deepest secret right now, how much damage would it do to your life?",
+            "Have you ever stolen something expensive just because you knew you wouldn’t get caught?",
+            "What’s your best manipulation tactic when you need something from someone?",
+            "What’s the most unprofessional thing you’ve done at work and managed to get away with?",
+            "If you had to spend a night in jail, what’s the most likely reason it would happen?",
+            "What’s the most humiliating thing you’ve done to someone for your own amusement?",
+            "If you could anonymously ruin someone’s life and never get caught, would you do it? If yes, who?",
+            "Have you ever used someone for money, sex, or connections—and did they ever figure it out?",
+            "What’s the worst thing you’ve ever done while pretending to be a 'good person'?",
+            "Have you ever faked a personal tragedy to get out of something? If so, what was the lie?",
+            "What’s the most insulting thing you’ve ever said to someone that you 100% meant?",
+            "What’s the cruelest thing you’ve done to someone who didn’t deserve it?",
+            "Have you ever sabotaged someone’s career or personal life just because you didn’t like them?",
+            "What’s the most selfish thing you’ve ever done that you don’t regret?",
+            "If you were guaranteed zero consequences, what’s the worst thing you’d do?",
+            "Have you ever done something horrible, but convinced yourself it was ‘fine’?",
+            "What’s the most unethical way you’ve gotten ahead in life?",
+            "Have you ever casually ruined someone’s reputation for your own benefit?",
+            "What’s a real-life villain move you’ve pulled that no one ever found out about?",
+            "What’s the cruelest thought you’ve ever had about someone that you’ve never said out loud?",
+            "If you were given a button that could erase one person from existence, no consequences—are you pressing it?",
+            "If you could get away with murder, who would you pick and how would you do it?",
+            "What’s the worst thing you’ve ever fantasized about doing to someone in pure, unfiltered rage?",
+            "If your friend accidentally confessed to a serious crime, how much would they have to pay you to stay silent?",
+            "Would you rather frame an innocent person for a felony or commit the felony yourself but never get caught?",
+            "What’s the closest you’ve ever been to completely ruining someone’s life—intentionally or not?",
+            "What’s the worst thing you’ve done out of pure pettiness, and would you do it again?",
+            "If someone offered you $10 million but you had to permanently ruin a stranger’s life, would you take it?",
+            "If you knew you could make any accusation against someone and have people believe you, what’s the most destructive thing you could say?",
+            "What’s the most cold-hearted thing you’ve ever done, but in your mind, it was ‘justified’?",
+            "If someone in this room went ‘missing’ tomorrow, which one would be the least suspicious disappearance?"
+            ];
+
+            function cycleTextEffect(targetElement, finalText) {
+                let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?$@#";
+                let iterations = 0;
+                let maxIterations = finalText.length * 1;
+
+                let interval = setInterval(() => {
+                    targetElement.innerText = finalText
+                        .split("")
+                        .map((char, index) => (index < iterations / 1 ? char : characters[Math.floor(Math.random() * characters.length)]))
+                        .join("");
+
+                    iterations++;
+
+                    if (iterations >= maxIterations) {
+                        clearInterval(interval);
+                        targetElement.innerText = finalText;
+                    }
+                }, 25);
+            }
+
+            document.getElementById("generateTopic").addEventListener("click", function () {
+                let topicCount = parseInt(document.getElementById("topicCount").value);
+                let topicList = document.getElementById("topicList");
+
+                topicList.innerHTML = ""; // Clear existing topics
+
+                let usedIndices = new Set();
+                while (usedIndices.size < topicCount) {
+                    let randomIndex = Math.floor(Math.random() * topics.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        let listItem = document.createElement("li");
+                        topicList.appendChild(listItem);
+                        cycleTextEffect(listItem, topics[randomIndex]);
+                    }
+                }
+            });
+        </script>
+</body>
+</html>
